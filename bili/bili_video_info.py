@@ -3,7 +3,6 @@
 
 import threading
 import time
-from concurrent import futures
 
 import pymysql
 import requests
@@ -72,17 +71,3 @@ def save_db():
             conn.rollback()
     conn.commit()
     result = []
-
-
-if __name__ == "__main__":
-    create_db()
-    print("启动爬虫，开始爬取数据")
-    for i in range(8, 2015):
-        begin = 10000 * i
-        urls = ["http://api.bilibili.com/archive_stat/stat?aid={}".format(j)
-                for j in range(begin, begin + 10000)]
-        with futures.ThreadPoolExecutor(64) as executor:
-            executor.map(run, urls)
-        save_db()
-    print("爬虫结束，共为您爬取到 {} 条数据".format(total))
-    conn.close()
