@@ -7,7 +7,7 @@ import pymysql
 import requests
 import pyquery
 
-from bili import headers, connect, cols
+from bili import headers, connect
 
 conn = pymysql.connect(**connect)
 cur = conn.cursor()
@@ -46,12 +46,3 @@ def update_db_video_name(names):
                 conn.rollback()
         conn.commit()
 
-
-if __name__ == "__main__":
-    for _col in cols[1: -1]:
-        video_aids = get_video_aid(_col)
-        _names = get_video_name(video_aids)
-        print _names
-        update_db_video_name(_names)
-        print(_col, "DONE!!!")
-    conn.close()

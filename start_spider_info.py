@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from bili import *
+
 from bili.bili_video_info import *
 from concurrent import futures
 
